@@ -1,0 +1,43 @@
+ConfigIntent config
+ConfigIntent configure
+ConfigIntent configuration
+ConfigIntent config stops
+ConfigIntent configure stops
+ConfigIntent config directions
+ConfigIntent configure directions
+
+ConfigIntent save
+ConfigIntent save config
+ConfigIntent save configuration
+ConfigIntent save configurations
+ConfigIntent save stop config
+ConfigIntent save stop configuration
+ConfigIntent save stop configurations
+ConfigIntent save direction config
+ConfigIntent save direction configuration
+ConfigIntent save direction configurations
+
+ConfigDirectionIntent configure {TheField} for {Direction}
+ConfigDirectionIntent configure {Direction} {TheField} to {StopId}
+ConfigDirectionIntent configure {TheField} for {Direction} to {StopId}
+ConfigDirectionIntent configure {Direction} {TheField} to {DirectionName}
+ConfigDirectionIntent configure {TheField} for {Direction} to {DirectionName}
+ConfigDirectionIntent set {TheField} for {Direction}
+ConfigDirectionIntent set {Direction} {TheField} to {StopId}
+ConfigDirectionIntent set {TheField} for {Direction} to {StopId}
+ConfigDirectionIntent set {Direction} {TheField} to {DirectionName}
+ConfigDirectionIntent set {TheField} for {Direction} to {DirectionName}
+ConfigDirectionIntent to set {TheField} for {Direction}
+ConfigDirectionIntent to set {Direction} {TheField} to {StopId}
+ConfigDirectionIntent to set {TheField} for {Direction} to {StopId}
+ConfigDirectionIntent to set {Direction} {TheField} to {DirectionName}
+ConfigDirectionIntent to set {TheField} for {Direction} to {DirectionName}
+
+ConfigDialogIntent {DirectionName}
+ConfigDialogIntent {StopId}
+
+GetUpdatesIntent update
+GetUpdatesIntent update schedule
+GetUpdatesIntent update times
+GetUpdatesIntent get updates
+GetUpdatesIntent get bus updates

@@ -1,0 +1,6 @@
+{
+    "roleArn" : "arn:aws:iam::<userid>:role/<rolegroupname>",
+    "region" : "us-east-1",
+    "appId" : "amzn1.ask.skill.<your app id>",
+    "testUserId" : "amzn1.ask.account.<test user id>"
+}

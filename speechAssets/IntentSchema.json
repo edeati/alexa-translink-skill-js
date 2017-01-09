@@ -1,0 +1,50 @@
+{
+  "intents": [
+    {
+      "intent": "ConfigDialogIntent",
+      "slots": [
+        {
+          "name": "DirectionName",
+          "type": "LIST_DIRECTION_NAMES"
+        },
+        {
+          "name": "StopId",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    },
+    {
+      "intent": "ConfigDirectionIntent",
+      "slots": [
+        {
+          "name": "Direction",
+          "type": "LIST_DIRECTIONS"
+        },
+        {
+          "name": "TheField",
+          "type": "LIST_FIELDS"
+        },
+        {
+          "name": "StopId",
+          "type": "AMAZON.NUMBER"
+        },
+        {
+          "name": "DirectionName",
+          "type": "LIST_DIRECTION_NAMES"
+        }
+      ]
+    },
+    {
+      "intent": "ConfigIntent"
+    },
+    {
+      "intent": "GetUpdatesIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+    {
+      "intent": "AMAZON.CancelIntent"
+    }
+  ]
+}
