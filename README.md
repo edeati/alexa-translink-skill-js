@@ -13,7 +13,7 @@ The Lambda function's config looks like this:
 * Role:           Choose an existing role
 * Existing role:  lambda-dynamo
 * Description:    Real-time bus updates from Translink
-**Advanced Settings:**
+* **Advanced Settings:**
 ... Timeout 0 min 30 sec (Make sure you do this as getting the real-time feed from Translink takes time and you run over the 10 sec default usually)
 
 To upload the skill zip up the contents of the src/ directory and upload it onto the AWS Lambda function's code page.
@@ -23,7 +23,7 @@ https://developer.amazon.com/blogs/post/Tx24Z2QZP5RRTG1/new-alexa-technical-tuto
 
 **MAKE SURE TO CHANGE [config.json](config.json) TO BE ABLE TO RUN/DEBUG THE SKILL!!!**
 
-### Note
+### Notes
 Set the following git option on [config.json](config.json) to not show up in the commit list:
 ```
 git update-index --assume-unchanged config.json
@@ -32,3 +32,7 @@ To undo and start tracking again:
 ```
 git update-index --no-assume-unchanged config.json
 ```
+
+The skill uses an older version of [gtfs-realtime.proto](translink-gtfs-realtime-proto/gtfs-realtime.proto) file that
+is converted to javascript using Google's gtfs-realtime-bindings project at https://github.com/google/gtfs-realtime-bindings. I have sourced this working
+version of the .proto file from http://opendata.transport.nsw.gov.au/forum/t/illegal-value-error-when-decoding-sydneytrains-gtfs-data/149/5
