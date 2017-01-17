@@ -15,7 +15,7 @@
 // the role must have a trusted policy with
 // "lambda.amazonaws.com" and "arn:aws:iam::<YOUR ACCOUNT ID>:user/<YOUR USER>"
 
-var config=require('../config.json');
+var config=require('../src/config.json');
 /* DO NOT MAKE CHANGE BELOW THIS */
 var AWS = require('aws-sdk');
 AWS.config.region = config.region;

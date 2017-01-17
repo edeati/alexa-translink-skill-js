@@ -21,11 +21,11 @@
 
 var AlexaSkill = require('./AlexaSkill'),
     globals = require('./globals'),
-    config = require('../config.json'),
+    appConfig = require('./config.json'),
     eventHandlers = require('./eventHandlers'),
     intentHandlers = require('./intentHandlers');
 
-var APP_ID =  config.appId;
+var APP_ID =  appConfig.appId;
 
 var Translink = function() {
     AlexaSkill.call(this, APP_ID);

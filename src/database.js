@@ -19,6 +19,8 @@
 
 'use strict';
 
+var appConfig = require('./config.json');
+
 var AWS = require('aws-sdk');
 AWS.config.update({'region':'us-east-1'});
 
@@ -40,7 +42,7 @@ var database = (function() {
     return {
         loadConfiguration: function(session, callBack) {
             dynamoDb.getItem({
-                TableName: 'Translink',
+                TableName: appConfig.tableName,
                 Key: {
                     UserId: {
                         S: session.user.userId
@@ -60,7 +62,7 @@ var database = (function() {
         saveConfiguration: function(session, callBack) {
             // Save the configuration for the user
             var itemToChange = {
-                    TableName: 'Translink',
+                    TableName: appConfig.tableName,
                     Item: {
                             UserId: {
                                 S: session.user.userId
