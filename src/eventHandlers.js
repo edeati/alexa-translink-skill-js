@@ -42,12 +42,16 @@ var registerEventHandlers = function(skillPrototype) {
                 session.attributes.configall = false;
                 if (!session.attributes.inboundstopid) {
                     response.ask("Inbound stop id has not been set. Please tell me the stop id for the inbound direction.");
+                    session.attributes.configStep = 1;
                 } else if (!session.attributes.outboundstopid) {
                     response.ask("Outbound stop id has not been set. Please tell me the stop id for the outbound direction.");
+                    session.attributes.configStep = 2;
                 } else if(!session.attributes.inbounddirectionname) {
                     response.ask("Inbound direction name has not been set. Please tell me the direction name for the inbound direction.");
+                    session.attributes.configStep = 3;
                 } else if(!session.attributes.outbounddirectionname) {
                     response.ask("Outbound direction name has not been set. Please tell me the direction name for the outbound direction.");
+                    session.attributes.configStep = 4;
                 } else {
                     translinkUpdates.getUpdates(session, function(updateMessage) {
                         response.tell(updateMessage);
@@ -59,6 +63,7 @@ var registerEventHandlers = function(skillPrototype) {
                 session.attributes.inbounddirectionname = false;
                 session.attributes.outbounddirectionname = false;
                 session.attributes.configall = true;
+                session.attributes.configStep = 1;
                 response.ask(globals.firstConfigSpeechOutput, globals.firstConfigRepromptText);
             }
         });

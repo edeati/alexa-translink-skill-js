@@ -31,6 +31,7 @@ var registerIntentHandlers = function(skillPrototype) {
         session.attributes.inbounddirectionname = false;
         session.attributes.outbounddirectionname = false;
         session.attributes.configall = true;
+        session.attributes.configStep = 1;
         response.ask(globals.firstConfigSpeechOutput, globals.firstConfigRepromptText);
     },
     skillPrototype.ConfigDirectionIntent = function(intent, session, response) {
@@ -101,18 +102,20 @@ var registerIntentHandlers = function(skillPrototype) {
     skillPrototype.ConfigDialogIntent = function(intent, session, response) {
         // User is answering a config question for either stop_id or stop_name for inbound/outbound stop
         var stopIdSlot = intent.slots.StopId;
-        var stopDrirectionNameSlot = intent.slots.DirectionName;
+        var stopDirectionNameSlot = intent.slots.DirectionName;
         if (stopIdSlot && stopIdSlot.value) {
             var repromptText = "Please name the ";
             var example = true;
             var direction = "";
-            if (!session.attributes.inboundstopid) {
+            if (session.attributes.configStep == 1) {
                 direction += ("Inbound direction");
                 session.attributes.inboundstopid = stopIdSlot.value;
-            } else if (!session.attributes.outboundstopid) {
+                session.attributes.configStep = 2;
+            } else if (session.attributes.configStep == 3) {
                 session.attributes.outboundstopid = stopIdSlot.value;
                 direction += ("Outbound direction");
                 example = false;
+                session.attributes.configStep = 4;
             } else {
                 response.tell("Sorry I don't know which stop id to configure!");
                 return;
@@ -131,10 +134,11 @@ var registerIntentHandlers = function(skillPrototype) {
                 }
             });            
         } else if (stopDirectionNameSlot && stopDirectionNameSlot.value) {
-            if (!session.attributes.inbounddirectionname) {
+            if (session.attributes.configStep == 2) {
                 session.attributes.inbounddirectionname = stopDirectionNameSlot.value;
                 var repromptText = "Please tell me the Outbound stop ID",
                     speechOutput = "Now we need to set a stop id for the outbound Bus stop. " + repromptText;
+                session.attributes.configStep = 3;
                 db.saveConfiguration(session, function(message){
                     if (session.attributes.configall) {
                         response.ask(speechOutput, repromptText);
@@ -142,7 +146,7 @@ var registerIntentHandlers = function(skillPrototype) {
                         response.tell(message);
                     }
                 });            
-            } else if (!session.attributes.outbounddirectionname) {
+            } else if (session.attributes.configStep == 4) {
                 session.attributes.outbounddirectionname = stopDirectionNameSlot.value;
                 session.attributes.configall = false;
                 db.saveConfiguration(session, function(message){
@@ -175,14 +179,19 @@ var registerIntentHandlers = function(skillPrototype) {
                     session.attributes.outbounddirectionname = config.config.OutboundDirectionName.S;
                 }
             }
+            session.attributes.configall = false;
             if (!session.attributes.inboundstopid) {
                 response.ask("Inbound stop id has not been set. Please tell me the stop id for the inbound direction.");
+                session.attributes.configStep = 1;
             } else if (!session.attributes.outboundstopid) {
                 response.ask("Outbound stop id has not been set. Please tell me the stop id for the outbound direction.");
+                session.attributes.configStep = 2;
             } else if(!session.attributes.inbounddirectionname) {
                 response.ask("Inbound direction name has not been set. Please tell me the direction name for the inbound direction.");
+                session.attributes.configStep = 3;
             } else if(!session.attributes.outbounddirectionname) {
                 response.ask("Outbound direction name has not been set. Please tell me the direction name for the outbound direction.");
+                session.attributes.configStep = 4;
             } else {
                 translinkUpdates.getUpdates(session, function(message) {
                     response.tell(message);
